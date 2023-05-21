@@ -3,7 +3,7 @@
 #include <list>
 int main() {
     Graph first;
-    first.buildTreeDFS(10);
+    first.buildTreeDFS(2);
     first.DFS();
     std::pair<bool, std::list<int>> fir;
     first.search_DFS(1);

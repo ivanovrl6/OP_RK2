@@ -16,7 +16,6 @@ Graph::Graph() {
     head->parent= nullptr;
 }
 Node *Graph::BFS_1(Node *first, std::ofstream &flog) {
-    {
         Node* ukz=first;
         Fifo<Node*> stack;
         while(ukz->listChilds.Head!= nullptr){
@@ -39,7 +38,6 @@ Node *Graph::BFS_1(Node *first, std::ofstream &flog) {
 
         }
 
-    }
 }
 
 Node *Graph::DFS_1(Node *first, std::ofstream &flog) {
@@ -225,6 +223,30 @@ std::pair<bool, std::list<int>> Graph::search_BFS(int nameNode) {
         }
     }
     return base;
+}
+
+int Graph::destruct(Node *first) {
+    if(first->listChilds.Head!= nullptr){
+        LinkNodes<Node*>* temp = first->listChilds.Head;
+        while (temp!= nullptr){
+            if(temp->nameNode->ishere==false){
+                destruct(temp->nameNode);
+            }
+            temp=temp->next;
+        }
+    }else{
+        LinkNodes<Node*>*go=first->listChilds.Head;
+        while(first->listChilds.Head!= nullptr){
+            first->listChilds.Head=go->next;
+            delete go;
+        }
+        go= nullptr;
+        return 0;
+    }
+}
+
+Graph::~Graph() {
+    destruct(head);
 }
 
 //

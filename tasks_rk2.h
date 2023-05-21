@@ -28,6 +28,8 @@ private:
     void DFS_tree(Node* first, int number);
 
     Node* DFS_search(Node* first,int number, std::pair<bool,std::list<int>>& p_val);
+
+    int destruct(Node* first);
 public:
     void DFS();
 
@@ -38,7 +40,11 @@ public:
     int buildTreeBFS(int countNodes);
 
     Graph(int number);
+
     Graph();
+
+
+    ~Graph();
 
     std::pair<bool, std::list<int>> search_DFS(int nameNode);
 
