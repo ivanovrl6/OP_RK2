@@ -11,7 +11,10 @@ Node:: ~Node(){
     countNodes=0;
     ishere=false;
 }
-
+Graph::Graph() {
+    head=new Node;
+    head->parent= nullptr;
+}
 Node *Graph::BFS_1(Node *first, std::ofstream &flog) {
     {
         Node* ukz=first;
@@ -89,10 +92,7 @@ Node *Graph::BFS_tree(int number) {
     }
 }
 
-Node *Graph::DFS_tree(Node *first, int number) {
-    if(first== nullptr){
-        return first->parent;
-    }
+void Graph::DFS_tree(Node *first, int number) {
     Node* temp=first;
     int counter = number;
     for (int i = 0; i < counter; ++i) {
@@ -142,15 +142,11 @@ void Graph::BFS() {
     flog.close();
 }
 int Graph::buildTreeDFS(int countNodes) {
-    head=new Node;
-    head->parent= nullptr;
     DFS_tree(head,countNodes);
     return Node::countNodes;
 }
 
 int Graph::buildTreeBFS(int countNodes) {
-    head=new Node;
-    head->parent= nullptr;
     BFS_tree(countNodes);
     return Node::countNodes;
 }
