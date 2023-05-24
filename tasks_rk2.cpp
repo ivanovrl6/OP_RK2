@@ -45,7 +45,7 @@ Node *Graph::DFS_1(Node *first, std::ofstream &flog) {
         flog<<first->name<<"{";
         LinkNodes<Node*>* temp = first->listChilds.Head;
         while (temp!= nullptr){
-            if(temp->nameNode->ishere==false){
+            if(!temp->nameNode->ishere){
                 DFS_1(temp->nameNode,flog);
                 flog<<"}";
             }
@@ -118,7 +118,7 @@ Node *Graph::DFS_search(Node *first, int number, std::pair<bool, std::list<int>>
             break;
         }
         DFS_search(temp->nameNode,number,p_val);
-        if(p_val.first==true){
+        if(p_val.first){
             p_val.second.push_back(temp->nameNode->name);
             break;
         }
@@ -174,13 +174,13 @@ std::pair<bool, std::list<int>> Graph::search_DFS(int nameNode) {
             break;
         }
         DFS_search(temp->nameNode,nameNode,base);
-        if(base.first==true){
+        if(base.first){
             base.second.push_back(temp->nameNode->name);
             break;
         }
         temp=temp->next;
     }
-    if(base.first==true) {
+    if(base.first) {
         base.second.push_back(head->name);
     }
     return base;
@@ -207,7 +207,7 @@ std::pair<bool, std::list<int>> Graph::search_BFS(int nameNode) {
             stack.addToEnd(temp->nameNode);
             temp=temp->next;
         }
-        if(base.first==true){
+        if(base.first){
             Node* sec_temp=temp->nameNode->parent;
             while (sec_temp!=head){
                 base.second.push_back(sec_temp->name);
@@ -229,7 +229,7 @@ int Graph::destruct(Node *first) {
     if(first->listChilds.Head!= nullptr){
         LinkNodes<Node*>* temp = first->listChilds.Head;
         while (temp!= nullptr){
-            if(temp->nameNode->ishere==false){
+            if(temp->nameNode->ishere){
                 destruct(temp->nameNode);
             }
             temp=temp->next;
